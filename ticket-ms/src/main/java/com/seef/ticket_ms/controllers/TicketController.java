@@ -1,6 +1,7 @@
 package com.seef.ticket_ms.controllers;
 
 import com.seef.ticket_ms.entities.Ticket;
+import com.seef.ticket_ms.entities.TypeTicket;
 import com.seef.ticket_ms.services.TicketService;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,11 @@ public class TicketController {
     @PostMapping("/ajouterTicketsEtAffecterAEvenementEtInternaute")
     public List<?> ajouterTicketsEtAffecterAEvenementEtInternaute(@RequestBody List<Ticket> tickets, @RequestParam Long idEvenement, @RequestParam Long idInternaute) {
         return ticketService.ajouterTicketsEtAffecterAEvenementEtInternaute(tickets, idEvenement, idInternaute);
+    }
+
+    @GetMapping("/montant")
+    public Double getMontantParEvtEtTypeTicket(@RequestParam String nomEvt, @RequestParam TypeTicket typeTicket) {
+        return ticketService.montantRecupereParEvtEtTypeTicket(nomEvt, typeTicket);
     }
 
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EvenementRepository extends JpaRepository<Evenement, Integer> {
+    Evenement findByNomEvenement(String nom);
 }

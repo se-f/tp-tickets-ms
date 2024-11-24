@@ -42,4 +42,9 @@ public class EvenementController {
         return evenementService.updateEvenement(evenement);
     }
 
+    @GetMapping("/by-nom/{nom}")
+    public Evenement getEvenementByNom(@RequestParam String nom) {
+        return evenementService.getEvenementByNom(nom);
+    }
+
 }

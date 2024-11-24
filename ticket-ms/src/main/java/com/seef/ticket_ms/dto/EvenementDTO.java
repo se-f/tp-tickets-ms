@@ -11,5 +11,6 @@ import java.util.Set;
 public class EvenementDTO {
     private long idEvenement;
     private long nbPlacesRestants;
+    private String nomEvenement;
 }
 

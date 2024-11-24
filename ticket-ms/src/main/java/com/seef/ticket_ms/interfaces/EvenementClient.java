@@ -12,4 +12,7 @@ public interface EvenementClient {
 
     @PutMapping("/api/evenements")
     EvenementDTO updateEvenement(@RequestBody EvenementDTO evenementDTO);
+
+    @GetMapping("/api/evenements/by-nom/{nom}")
+    EvenementDTO getEvenementByNom(@RequestParam("nom") String nom);
 }

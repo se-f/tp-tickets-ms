@@ -3,6 +3,7 @@ package com.seef.ticket_ms.services;
 import com.seef.ticket_ms.dto.EvenementDTO;
 import com.seef.ticket_ms.dto.InternauteDTO;
 import com.seef.ticket_ms.entities.Ticket;
+import com.seef.ticket_ms.entities.TypeTicket;
 import com.seef.ticket_ms.interfaces.EvenementClient;
 import com.seef.ticket_ms.interfaces.InternauteClient;
 import com.seef.ticket_ms.repositories.TicketRepository;
@@ -77,6 +78,26 @@ public class TicketService {
         evenementClient.updateEvenement(evenementDTO);
 
         return savedTickets;
+    }
+
+    public Double montantRecupereParEvtEtTypeTicket(String nomEvt, TypeTicket typeTicket) {
+        // Récupérer l'événement via le Feign client
+        EvenementDTO evenementDTO = evenementClient.getEvenementByNom(nomEvt);
+
+        if (evenementDTO == null) {
+            throw new IllegalArgumentException("Événement introuvable pour le nom: " + nomEvt);
+        }
+
+        // Récupérer les tickets associés à cet événement et de ce type
+        List<Ticket> tickets = ticketRepository.findByIdEvenementAndTypeTicket(evenementDTO.getIdEvenement(), typeTicket);
+
+        // Calculer le montant à récupérer
+        Double montantTotal = 0.0;
+        for (Ticket ticket : tickets) {
+            montantTotal += ticket.getPrixTicket();
+        }
+
+        return montantTotal;
     }
 
 }

@@ -71,4 +71,7 @@ public class EvenementService {
     }
 
 
+    public Evenement getEvenementByNom(String nom) {
+        return evenementRepository.findByNomEvenement(nom);
+    }
 }
