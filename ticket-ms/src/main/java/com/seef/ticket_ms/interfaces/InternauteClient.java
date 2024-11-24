@@ -10,4 +10,7 @@ public interface InternauteClient {
 
     @GetMapping("/api/internautes/{idInternaute}")
     InternauteDTO getInternaute(@PathVariable("idInternaute") Long idInternaute);
+
+    @GetMapping("/api/internautes/identifiant/{id}")
+    String getInternauteIdentifiantById(@PathVariable("id") String identifiant);
 }

@@ -52,4 +52,9 @@ public class TicketController {
         return ticketService.montantRecupereParEvtEtTypeTicket(nomEvt, typeTicket);
     }
 
+    @GetMapping("/internauteLePlusActif")
+    public String internauteLePlusActif() {
+        return ticketService.internauteLePlusActif();
+    }
+
 }

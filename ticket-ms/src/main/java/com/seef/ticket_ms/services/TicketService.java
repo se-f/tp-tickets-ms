@@ -100,4 +100,18 @@ public class TicketService {
         return montantTotal;
     }
 
+    public String internauteLePlusActif() {
+        List<Object[]> result = ticketRepository.findInternauteWithMostTickets();
+
+        if (result.isEmpty()) {
+            return null;  // Aucun internaute trouvé
+        }
+
+        // Le premier élément du résultat correspond à l'internaute le plus actif
+        String idInternaute = result.getFirst()[0].toString();  // L'ID de l'internaute
+        System.err.println("idInternaute = " + idInternaute);
+        return internauteClient.getInternauteIdentifiantById(idInternaute);  // Retourner le nom de l'internaute
+
+    }
+
 }
