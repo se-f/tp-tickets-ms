@@ -16,29 +16,34 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @PostMapping("")
-    public Ticket ajouterTicket(@RequestBody Ticket ticket){
+    @PostMapping()
+    public Ticket ajouterTicket(@RequestBody Ticket ticket) {
         return ticketService.ajouterTicket(ticket);
     }
 
     @GetMapping("/{id}")
-    public Ticket getTicketById(@PathVariable int id){
+    public Ticket getTicketById(@PathVariable int id) {
         return ticketService.getTicketById(id);
     }
 
     @GetMapping()
-    public List<Ticket> getAllTickets(){
+    public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTicket(@PathVariable int id){
+    public void deleteTicket(@PathVariable int id) {
         ticketService.deleteTicket(id);
     }
 
     @PutMapping()
-    public Ticket updateTicket(@RequestBody Ticket ticket){
+    public Ticket updateTicket(@RequestBody Ticket ticket) {
         return ticketService.updateTicket(ticket);
+    }
+
+    @PostMapping("/ajouterTicketsEtAffecterAEvenementEtInternaute")
+    public List<?> ajouterTicketsEtAffecterAEvenementEtInternaute(@RequestBody List<Ticket> tickets, @RequestParam Long idEvenement, @RequestParam Long idInternaute) {
+        return ticketService.ajouterTicketsEtAffecterAEvenementEtInternaute(tickets, idEvenement, idInternaute);
     }
 
 }

@@ -22,4 +22,7 @@ public class Ticket {
 
     // Store the ID of the Evenement (foreign key in a microservice context)
     private Long idEvenement;
+
+    // Store the ID of the Internaute (foreign key in a microservice context)
+    private Long idInternaute;
 }

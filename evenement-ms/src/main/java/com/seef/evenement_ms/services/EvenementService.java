@@ -43,7 +43,18 @@ public class EvenementService {
     }
 
     public Evenement updateEvenement(EvenementDTO evenementDTO) {
-        Evenement evenement = evenementMapper.toEntity(evenementDTO);
+        System.err.println("RECEIVED DTO:" + evenementDTO);
+
+        // Fetch the existing entity from the database
+        Evenement evenement = evenementRepository.findById((int) evenementDTO.getIdEvenement())
+                .orElseThrow(() -> new IllegalArgumentException("Evenement not found"));
+
+        // Use the mapper to update the entity with non-null values from the DTO
+        evenementMapper.updateEvenementFromDTO(evenementDTO, evenement);
+
+        System.err.println("TURNED TO ENTITY:" + evenement);
+
+        // Save the updated entity
         return evenementRepository.save(evenement);
     }
 

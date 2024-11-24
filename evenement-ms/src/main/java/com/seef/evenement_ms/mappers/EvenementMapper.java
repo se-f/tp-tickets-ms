@@ -23,38 +23,54 @@ public class EvenementMapper {
     // Convertir EvenementDTO en Evenement
     public Evenement toEntity(EvenementDTO evenementDTO) {
         Evenement evenement = new Evenement();
-        evenement.setNomEvenement(evenementDTO.getNomEvenement());
+        evenement.setIdEvenement(evenementDTO.getIdEvenement());
+        if (evenementDTO.getNomEvenement() != null) {
+            evenement.setNomEvenement(evenementDTO.getNomEvenement());
+        }
         evenement.setNbPlacesRestants(evenementDTO.getNbPlacesRestants());
-        evenement.setDateEvenement(evenementDTO.getDateEvenement());
+
+        if (evenementDTO.getDateEvenement() != null) {
+            System.out.println("Date: " + evenementDTO.getDateEvenement());
+            evenement.setDateEvenement(evenementDTO.getDateEvenement());
+        }
 
         // Récupérer les catégories à partir des IDs
-        Set<Integer> categoryIds = evenementDTO.getCategories()
-                .stream()
-                .map(Long::intValue) // Conversion Long -> Integer
-                .collect(Collectors.toSet());
+        if (evenementDTO.getCategories() != null) {
 
-        // Récupérer et convertir les catégories en Set
-        Set<Categorie> categories = new HashSet<>(categorieRepository.findAllById(categoryIds));
-        evenement.setCategories(categories);
+            Set<Integer> categoryIds = evenementDTO.getCategories()
+                    .stream()
+                    .map(Long::intValue) // Conversion Long -> Integer
+                    .collect(Collectors.toSet());
 
+            // Récupérer et convertir les catégories en Set
+            Set<Categorie> categories = new HashSet<>(categorieRepository.findAllById(categoryIds));
+            evenement.setCategories(categories);
+        }
         return evenement;
     }
 
+    public void updateEvenementFromDTO(EvenementDTO evenementDTO, Evenement evenement) {
+        if (evenementDTO.getNomEvenement() != null) {
+            evenement.setNomEvenement(evenementDTO.getNomEvenement());
+        }
 
-    // Convertir Evenement en EvenementDTO
-    public EvenementDTO toDTO(Evenement evenement) {
-        EvenementDTO evenementDTO = new EvenementDTO();
-        evenementDTO.setNomEvenement(evenement.getNomEvenement());
-        evenementDTO.setNbPlacesRestants(evenement.getNbPlacesRestants());
-        evenementDTO.setDateEvenement(evenement.getDateEvenement());
+        if (evenementDTO.getNbPlacesRestants() != 0) {
+            evenement.setNbPlacesRestants(evenementDTO.getNbPlacesRestants());
+        }
 
-        // Extraire les IDs des catégories
-        Set<Long> categoryIds = evenement.getCategories()
-                .stream()
-                .map(Categorie::getIdCategorie)
-                .collect(Collectors.toSet());
-        evenementDTO.setCategories(categoryIds);
+        if (evenementDTO.getDateEvenement() != null) {
+            evenement.setDateEvenement(evenementDTO.getDateEvenement());
+        }
 
-        return evenementDTO;
+        if (evenementDTO.getCategories() != null) {
+            Set<Integer> categoryIds = evenementDTO.getCategories()
+                    .stream()
+                    .map(Long::intValue) // Conversion Long -> Integer
+                    .collect(Collectors.toSet());
+
+            // Récupérer et convertir les catégories en Set
+            Set<Categorie> categories = new HashSet<>(categorieRepository.findAllById(categoryIds));
+            evenement.setCategories(categories);
+        }
     }
 }
