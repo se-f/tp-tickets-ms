@@ -1,23 +1,25 @@
 package com.seef.ticket_ms.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "ticket")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idTicket;
+    private Long idTicket;
 
     private String codeTicket;
-    private double prixTicket;
+
+    private Double prixTicket;
+
+    @Enumerated(EnumType.STRING)
     private TypeTicket typeTicket;
 
-
+    // Store the ID of the Evenement (foreign key in a microservice context)
+    private Long idEvenement;
 }

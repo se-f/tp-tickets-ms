@@ -1,5 +1,6 @@
 package com.seef.evenement_ms.services;
 
+import com.seef.evenement_ms.dto.CategorieDTO;
 import com.seef.evenement_ms.entities.Categorie;
 import com.seef.evenement_ms.repositories.CategorieRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,10 @@ public class CategorieService {
         this.categorieRepository = categorieRepository;
     }
 
-    public Categorie ajouterCategorie(Categorie categorie){
+    public Categorie ajouterCategorie(CategorieDTO categorieDTO){
+        Categorie categorie = new Categorie();
+        categorie.setNomCategorie(categorieDTO.getNomCategorie());
+        categorie.setCodeCategorie(categorieDTO.getCodeCategorie());
         return categorieRepository.save(categorie);
     }
 
@@ -31,7 +35,11 @@ public class CategorieService {
         categorieRepository.deleteById(id);
     }
 
-    public Categorie updateCategorie(Categorie categorie){
+    public Categorie updateCategorie(CategorieDTO categorieDTO){
+
+        Categorie categorie = new Categorie();
+        categorie.setNomCategorie(categorieDTO.getNomCategorie());
+        categorie.setCodeCategorie(categorieDTO.getCodeCategorie());
         return categorieRepository.save(categorie);
     }
 }

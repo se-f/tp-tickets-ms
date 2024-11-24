@@ -26,7 +26,7 @@ public class TicketController {
         return ticketService.getTicketById(id);
     }
 
-    @GetMapping("/get")
+    @GetMapping()
     public List<Ticket> getAllTickets(){
         return ticketService.getAllTickets();
     }

@@ -1,7 +1,9 @@
 package com.seef.evenement_ms.controllers;
 
+import com.seef.evenement_ms.dto.CategorieDTO;
 import com.seef.evenement_ms.entities.Categorie;
 import com.seef.evenement_ms.services.CategorieService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +19,16 @@ public class CategorieController {
     }
 
     @PostMapping()
-    public Categorie addCategorie(@RequestBody Categorie categorie){
-        return categorieService.ajouterCategorie(categorie);
+    public ResponseEntity<CategorieDTO> addCategorie(@RequestBody CategorieDTO categorie){
+        categorieService.ajouterCategorie(categorie);
+        return ResponseEntity.ok(categorie);
     }
 
+
     @GetMapping("/{id}")
-    public Categorie getCategorieById(@PathVariable int id){
-        return categorieService.getCategorieById(id);
+    public ResponseEntity<Categorie> getCategorieById(@PathVariable int id){
+        categorieService.getCategorieById(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping()
@@ -37,8 +42,9 @@ public class CategorieController {
     }
 
     @PutMapping()
-    public Categorie updateCategorie(@RequestBody Categorie categorie){
-        return categorieService.updateCategorie(categorie);
+    public CategorieDTO updateCategorie(@RequestBody CategorieDTO categorie){
+        categorieService.updateCategorie(categorie);
+        return categorie;
     }
 
 

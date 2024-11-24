@@ -16,28 +16,28 @@ public class InternauteController {
         this.internauteService = internauteService;
     }
 
-    @PostMapping("")
-    public Internaute addTicket(@RequestBody Internaute internaute){
+    @PostMapping()
+    public Internaute addInternaute(@RequestBody Internaute internaute){
         return internauteService.addInternaute(internaute);
     }
 
     @GetMapping("/{id}")
-    public Internaute getTicketById(@PathVariable int id){
+    public Internaute getInternauteById(@PathVariable int id){
         return internauteService.getInternauteById(id);
     }
 
-    @GetMapping("/get")
-    public List<Internaute> getAllTickets(){
+    @GetMapping()
+    public List<Internaute> getAllInternautes(){
         return internauteService.getAllInternautes();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTicket(@PathVariable int id){
+    public void deleteInternaute(@PathVariable int id){
         internauteService.deleteInternaute(id);
     }
 
     @PutMapping()
-    public Internaute updateTicket(@RequestBody Internaute internaute){
+    public Internaute updateInternaute(@RequestBody Internaute internaute){
         return internauteService.updateInternaute(internaute);
     }
 

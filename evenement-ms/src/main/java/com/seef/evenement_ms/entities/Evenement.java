@@ -23,9 +23,9 @@ public class Evenement {
 
     @ManyToMany
     @JoinTable(
-            name = "Evenement_Categorie",
-            joinColumns = @JoinColumn(name = "idEvenement"),
-            inverseJoinColumns = @JoinColumn(name = "idCategorie")
+            name = "evenement_categorie",
+            joinColumns = @JoinColumn(name = "id_evenement"),
+            inverseJoinColumns = @JoinColumn(name = "id_categorie")
     )
     @JsonManagedReference
     private Set<Categorie> categories;
